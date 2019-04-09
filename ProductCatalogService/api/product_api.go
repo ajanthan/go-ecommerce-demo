@@ -11,6 +11,7 @@ import (
 	product "github.com/ajanthan/go-ecommerce-demo/ProductCatalogService/data"
 )
 
+//ProductAPI is data structure hold the static data
 type ProductAPI struct {
 	CatelogMap map[string]product.Product
 }
