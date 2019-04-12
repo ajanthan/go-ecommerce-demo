@@ -18,6 +18,9 @@ type PaymentRequest struct {
 	CreditCardInfo CreditCard `json:"creditCard"`
 	Amount         float64    `json:"amount"`
 }
+type PaymentReponse struct {
+	TransactionID string
+}
 
 func (p PaymentRequest) String() string {
 	paymentRequestStr := "creditCard:{%s},amount:%f"

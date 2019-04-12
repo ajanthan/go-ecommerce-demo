@@ -38,6 +38,16 @@ func (p *PaymentEndpoint) Charge(res http.ResponseWriter, req *http.Request) {
 	randomGen := rand.New(randomSource)
 	transactionID := randomGen.Intn(1000000)
 	log.Printf("Processing payment: transactionID: %d, %s", transactionID, *paymentRequest)
-	fmt.Fprintf(res, "{\"transactionID\": %d}", transactionID)
+	paymentResponse := model.PaymentReponse{}
+	paymentResponse.TransactionID = fmt.Sprint(transactionID)
+	resBytes, marshelErr := json.Marshal(paymentResponse)
+	if marshelErr != nil {
+		res.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprint(res, marshelErr)
+		return
+	}
+	res.Write(resBytes)
+	res.WriteHeader(http.StatusCreated)
+	res.Header().Set("Content-Type", "application/json")
 
 }
