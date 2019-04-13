@@ -47,7 +47,6 @@ func (p *PaymentEndpoint) Charge(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 	res.Write(resBytes)
-	res.WriteHeader(http.StatusCreated)
 	res.Header().Set("Content-Type", "application/json")
 
 }

@@ -5,5 +5,6 @@ CREATE TABLE IF NOT EXISTS cart(
     userID VARCHAR(15),
     productID VARCHAR(15),
     quantity INT,
-    PRIMARY KEY(cartID)
+    PRIMARY KEY(cartID),
+    CONSTRAINT UC_Cart UNIQUE (userID,productID)
 )ENGINE=INNODB;

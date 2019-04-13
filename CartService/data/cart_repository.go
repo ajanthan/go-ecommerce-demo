@@ -52,6 +52,29 @@ func (c *CartRepository) GetCart(userID string) model.Cart {
 	log.Println("Cart in repository ", cart)
 	return cart
 }
+func (c *CartRepository) AddOrUpdateCartItem(userID string, item model.Item) {
+	log.Println("user in repository ", userID)
+	var quantity int
+	rows, queryErr := c.Db.Query("select quantity from cart where userID=? and productID=?", userID, item.ProductID)
+	if queryErr != nil {
+		log.Fatal(queryErr)
+	}
+	if rows.Next() {
+		if err := rows.Scan(&quantity); err != nil {
+			log.Fatal(err)
+		}
+	} else {
+		c.AddItemToCart(userID, item)
+		return
+	}
+
+	item.Quantity = item.Quantity + quantity
+	rows, updateQueryErr := c.Db.Query("update cart set quantity=? where productID=? and userID=?", item.Quantity, item.ProductID, userID)
+	if updateQueryErr != nil {
+		log.Fatal(updateQueryErr)
+	}
+
+}
 func (c *CartRepository) EmptyCart(userID string) {
 	_, queryErr := c.Db.Query("delete from cart where userID=?", userID)
 	if queryErr != nil {

@@ -30,7 +30,9 @@ func (c *CartAPI) AddCartHandler(res http.ResponseWriter, req *http.Request) {
 		fmt.Fprint(res, jsonErr)
 		return
 	}
-	c.Repository.AddItemToCart(cart.UserID, cart.Items[0])
+	for _, item := range cart.Items {
+		c.Repository.AddOrUpdateCartItem(cart.UserID, item)
+	}
 	res.WriteHeader(http.StatusAccepted)
 }
 

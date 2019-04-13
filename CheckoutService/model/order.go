@@ -7,10 +7,10 @@ import (
 )
 
 type Order struct {
-	UserID         string
-	Email          string
-	Address        shipping.Address
-	CreditCardInfo payment.CreditCard
+	UserID         string             `json:"userID"`
+	Email          string             `json:"email"`
+	Address        shipping.Address   `json:"address"`
+	CreditCardInfo payment.CreditCard `json:"creditCard"`
 }
 
 type OrderResult struct {

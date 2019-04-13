@@ -3,6 +3,7 @@ package api
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
@@ -77,7 +78,15 @@ func (c *CheckoutEndpoint) Checkout(res http.ResponseWriter, req *http.Request) 
 		fmt.Fprint(res, shippingOrderError)
 		return
 	}
-	//send an email
+	//Empty cart
+	emptyCartErr := emptyCart(checkoutRequest.UserID)
+
+	if emptyCartErr != nil {
+		res.WriteHeader(500)
+		fmt.Fprint(res, emptyCartErr)
+		return
+	}
+	//send the result
 	orderResult.Address = checkoutRequest.Address
 	orderResult.Cart = cart
 	orderResult.Cost = float64(cost)
@@ -90,7 +99,6 @@ func (c *CheckoutEndpoint) Checkout(res http.ResponseWriter, req *http.Request) 
 		return
 	}
 	res.Write(respBytes)
-	res.WriteHeader(http.StatusCreated)
 	res.Header().Set("Content-Type", "application/json")
 
 }
@@ -214,4 +222,19 @@ func placeOrder(address shipping.Address, cart cart.Cart) (string, error) {
 	}
 	trackingID = shippingOrderResponse.TrackingID
 	return trackingID, nil
+}
+
+func emptyCart(userID string) error {
+	req, rqErr := http.NewRequest(http.MethodDelete, "http://localhost:8889/cart/"+userID, nil)
+	if rqErr != nil {
+		return rqErr
+	}
+	resp, respErr := http.DefaultClient.Do(req)
+	if respErr != nil {
+		return respErr
+	}
+	if resp.StatusCode != http.StatusAccepted {
+		return errors.New("Error in emptying cart")
+	}
+	return nil
 }
