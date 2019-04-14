@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/ajanthan/go-ecommerce-demo/CartService/model"
+	"github.com/ajanthan/go-ecommerce-demo/CartService/pkg/model"
 )
 
 type Address struct {

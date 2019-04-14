@@ -10,11 +10,11 @@ import (
 	"net/http"
 	"time"
 
-	cart "github.com/ajanthan/go-ecommerce-demo/CartService/model"
-	"github.com/ajanthan/go-ecommerce-demo/CheckoutService/model"
-	payment "github.com/ajanthan/go-ecommerce-demo/PaymentService/model"
-	product "github.com/ajanthan/go-ecommerce-demo/ProductCatalogService/data"
-	shipping "github.com/ajanthan/go-ecommerce-demo/ShippingService/model"
+	cart "github.com/ajanthan/go-ecommerce-demo/CartService/pkg/model"
+	"github.com/ajanthan/go-ecommerce-demo/CheckoutService/pkg/model"
+	payment "github.com/ajanthan/go-ecommerce-demo/PaymentService/pkg/model"
+	product "github.com/ajanthan/go-ecommerce-demo/ProductCatalogService/pkg/data"
+	shipping "github.com/ajanthan/go-ecommerce-demo/ShippingService/pkg/model"
 )
 
 type CheckoutEndpoint struct {

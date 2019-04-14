@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ajanthan/go-ecommerce-demo/ShippingService/api"
+	"github.com/ajanthan/go-ecommerce-demo/ShippingService/pkg/api"
 	"github.com/gorilla/mux"
 )
 

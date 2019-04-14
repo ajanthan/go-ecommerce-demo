@@ -8,7 +8,7 @@ import (
 
 	"github.com/gorilla/mux"
 
-	product "github.com/ajanthan/go-ecommerce-demo/ProductCatalogService/data"
+	product "github.com/ajanthan/go-ecommerce-demo/ProductCatalogService/pkg/data"
 )
 
 //ProductAPI is data structure hold the static data

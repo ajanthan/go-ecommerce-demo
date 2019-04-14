@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 
-	product "github.com/ajanthan/go-ecommerce-demo/ProductCatalogService/data"
+	product "github.com/ajanthan/go-ecommerce-demo/ProductCatalogService/pkg/data"
 )
 
 type catelog struct {

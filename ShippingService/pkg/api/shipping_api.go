@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ajanthan/go-ecommerce-demo/ShippingService/model"
+	"github.com/ajanthan/go-ecommerce-demo/ShippingService/pkg/model"
 )
 
 type ShippingEndpoint struct {
